@@ -1,9 +1,7 @@
 import useSWR from 'swr'
 
 import { usePlanet } from '../hooks/usePlanet'
-import { PlanetLoading } from '../components/PlanetLoading'
-import { PlanetInformation } from '../components/PlanetInformation'
-import { Layout } from '../components/Layout'
+import { PlanetLoading, PlanetInformation, Layout, Button } from '../components'
 
 import { getPlanets } from '../services/planets'
 
@@ -17,13 +15,14 @@ export const PlanetDetail = (props: {
   } = props
 
   const { data, isLoading } = useSWR(`/planets/${id}`, () => getPlanets(id))
-  const { handleClick, planetStructure } = usePlanet()
-  // const [info, setInformation] = useState<PlanetStructureInfo>('overview')
+  const { planetStructure } = usePlanet()
 
+  // encargado de mostrar el estado del loading
   if (isLoading) {
     return <PlanetLoading />
   }
 
+  // extraemos la información necesaria para mostrar
   const {
     overview,
     structure,
@@ -36,6 +35,7 @@ export const PlanetDetail = (props: {
     temperature,
   } = data!
 
+  // colocamos la información en un objeto para dividirla y mostrarla segun el estado
   const infoPlanet = {
     overview: {
       overview: overview.content,
@@ -51,9 +51,9 @@ export const PlanetDetail = (props: {
     },
   }
 
+  // Retorna el string con la url a la imagen validando el estado
   const getImageSource = (value?: boolean) => {
     if (planetStructure === 'internalStructure') return images.internal.large
-    // if (info === 'surfaceGeology') return images.geology.large
     if (planetStructure === 'surfaceGeology' && value)
       return images.geology.large
 
@@ -61,7 +61,7 @@ export const PlanetDetail = (props: {
   }
 
   return (
-    <Layout>
+    <Layout title={id} navVisible>
       <section className='w-full flex flex-col items-center justify-center p-2'>
         <div className='w-full grid grid-cols-1 md:grid-cols-2 justify-center items-center mt-5 relative'>
           <picture className='flex justify-center px-2 relative'>
@@ -77,7 +77,7 @@ export const PlanetDetail = (props: {
               className='w-72 md:w-auto'
               width={500}
               height={500}
-              alt=''
+              alt={`image of the planet ${name}`}
               loading='lazy'
             />
           </picture>
@@ -96,44 +96,16 @@ export const PlanetDetail = (props: {
               </a>
             </div>
 
-            {/* TODO: arreglar este codigo de los btn */}
             <div className='flex flex-grow flex-col gap-3 justify-start'>
-              <button
-                onClick={() => handleClick('overview')}
-                className={`
-              ${
-                planetStructure === 'overview'
-                  ? 'bg-green-600'
-                  : 'bg-slate-800 hover:bg-slate-500/50'
-              } rounded w-full md:w-3/4 p-5 text-start capitalize text-lg border-2 border-slate-600`}
-              >
-                overview
-              </button>
-
-              <button
-                onClick={() => handleClick('internalStructure')}
-                className={`${
-                  planetStructure === 'internalStructure'
-                    ? 'bg-green-600'
-                    : 'bg-slate-800 hover:bg-slate-500/50'
-                } 
-                rounded border-2 border-slate-600 w-full md:w-3/4 p-5 text-start capitalize text-lg`}
-              >
-                internal structure
-              </button>
-
-              <button
-                onClick={() => handleClick('surfaceGeology')}
-                className={`
-              ${
-                planetStructure === 'surfaceGeology'
-                  ? 'bg-green-600'
-                  : 'bg-slate-800 hover:bg-slate-500/50'
-              }
-                border-2 border-slate-600 rounded w-full md:w-3/4 p-5 text-start capitalize text-lg `}
-              >
-                surface geology
-              </button>
+              <Button planetInformation='overview' text='overview' />
+              <Button
+                planetInformation='surfaceGeology'
+                text='surfaceGeology'
+              />
+              <Button
+                planetInformation='internalStructure'
+                text='internalStructure'
+              />
             </div>
           </div>
         </div>

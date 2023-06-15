@@ -1,15 +1,12 @@
 import { Route } from 'wouter'
-import { Home } from './pages/Home'
-import { PlanetDetail } from './pages/PlanetDetail'
+import { PlanetDetail, Home } from './pages'
 
 function App() {
   return (
-    <>
-      <main className=''>
-        <Route path='/' component={Home} />
-        <Route path='/planets/:id' component={PlanetDetail} />
-      </main>
-    </>
+    <main>
+      <Route path='/' component={Home} />
+      <Route path='/planets/:id' component={PlanetDetail} />
+    </main>
   )
 }
 

@@ -2,25 +2,30 @@ import { Link } from 'wouter'
 import { usePlanet } from '../hooks/usePlanet'
 import { Planets } from '../interfaces'
 
-export const PlanetCard = ({ title }: { title: Planets }) => {
+/**
++ * Renders a card for a planet, with an image and a link to navigate to the planet page.
++ *
++ * @param {Planets} planet - the planet object to render the card for
++ * @returns {JSX.Element} A React component representing the planet card
++ */
+
+export const PlanetCard = ({ planet }: { planet: Planets }): JSX.Element => {
   const { changeNav } = usePlanet()
 
   return (
     <Link
-      href={`planets/${title}`}
+      href={`planets/${planet}`}
       className='flex flex-col items-center pt-2'
-      onClick={() => changeNav(title)}
+      onClick={() => changeNav(planet)}
     >
       <img
-        src={`/assets/planet-${title}-small.svg`}
+        src={`/assets/planet-${planet}-small.svg`}
         height={150}
         width={150}
-        alt={`image of the planet ${title}`}
-        loading='lazy'
+        alt={`image of the planet ${planet}`}
       />
-      {/* <p className='w-full text-xl rounded tracking-wider text-center btn btn-success'> */}
       <p className='w-full text-xl py-1 rounded tracking-wider text-center bg-slate-800'>
-        Go to {title}
+        Go to {planet}
       </p>
     </Link>
   )

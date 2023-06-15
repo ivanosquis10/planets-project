@@ -2,6 +2,7 @@ import { createContext } from 'react'
 import { Links, Planets, PlanetStructureInfo } from '../interfaces'
 
 interface ContextProps {
+  // properties
   stateNavbar: Planets
   planetsLinks: Links[]
   planetStructure: PlanetStructureInfo

@@ -2,12 +2,13 @@ import { Link } from 'wouter'
 import { usePlanet } from '../hooks/usePlanet'
 import { IconEarth, MenuIcon } from './Icons'
 
-export const Header = () => {
+export const Header = ({ isVisible }: { isVisible?: boolean }) => {
   const { stateNavbar, changeNav, planetsLinks } = usePlanet()
 
   return (
     <div className='drawer relative z-50'>
       <input id='my-drawer-3' type='checkbox' className='drawer-toggle' />
+
       <div className='drawer-content flex flex-col'>
         {/* Navbar */}
         <div className='w-full navbar bg-slate-900'>
@@ -24,7 +25,10 @@ export const Header = () => {
               Planets | World
             </Link>
           </div>
-          <div className='flex-none hidden lg:block'>
+
+          <div
+            className={`flex-none hidden ${isVisible ? 'lg:block' : 'hidden'}`}
+          >
             <ul className='menu-horizontal md:flex items-center justify-end gap-x-5'>
               {planetsLinks.map(link => (
                 <li
@@ -55,6 +59,7 @@ export const Header = () => {
           </div>
         </div>
       </div>
+
       <div className='drawer-side'>
         <label htmlFor='my-drawer-3' className='drawer-overlay'></label>
         <ul className='p-4 w-80 h-full bg-green-600/30 space-y-5 backdrop-blur-sm'>

@@ -38,15 +38,15 @@ export const PlanetInformation: FC<Props> = ({
 
   return (
     <div className='w-full mt-10 md:mt-20 mb-2 flex flex-col md:flex-row items-center justify-around gap-5 md:gap-10 p-4'>
-      {information.map(info => (
+      {information.map(({ content, id, title }) => (
         <div
-          key={info.id}
+          key={id}
           className='bg-slate-800 px-5 py-4 w-full rounded space-y-2 border-2 border-slate-700 hover:scale-105 duration-300 ease-in-out'
         >
           <p className='uppercase text-sm font-medium text-slate-400 tracking-wider'>
-            {info.title}
+            {title}
           </p>
-          <p className='text-3xl tracking-wider font-bold'>{info.content}</p>
+          <p className='text-3xl tracking-wider font-bold'>{content}</p>
         </div>
       ))}
     </div>

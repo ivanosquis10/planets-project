@@ -6,11 +6,11 @@ export const PlanetLoading = () => {
           src='/assets/earth-loading.svg'
           width={300}
           height={300}
-          alt='imagen de una tierra mientras carga'
+          alt='image of the planet loading'
           className='animate-bounce'
         />
       </picture>
-      <p className='uppercase text-5xl mt-2'>Loading planet...</p>
+      <p className='uppercase text-3xl lg:text-5xl mt-2'>Loading planet...</p>
     </div>
   )
 }
