@@ -41,7 +41,10 @@ export type Planets =
   | 'uranus'
   | 'neptune'
 
-export type Information = 'overview' | 'internalStructure' | 'surfaceGeology'
+export type PlanetStructureInfo =
+  | 'overview'
+  | 'internalStructure'
+  | 'surfaceGeology'
 
 export interface Links {
   id: string

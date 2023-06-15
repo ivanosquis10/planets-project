@@ -1,6 +1,6 @@
 import { FC, ReactNode, useState } from 'react'
 import { PlanetContext } from './PlanetContext'
-import { Links, Planets } from '../interfaces'
+import { Links, Planets, PlanetStructureInfo } from '../interfaces'
 
 type Props = {
   children: ReactNode
@@ -8,6 +8,8 @@ type Props = {
 
 export const PlanetProvider: FC<Props> = ({ children }) => {
   const [stateNavbar, setStateNavbar] = useState<Planets>('earth')
+  const [planetStructure, setPlanetStructure] =
+    useState<PlanetStructureInfo>('overview')
 
   const planetsLinks: Links[] = [
     {
@@ -56,15 +58,21 @@ export const PlanetProvider: FC<Props> = ({ children }) => {
     setStateNavbar(value)
   }
 
+  const handleClick = (info: PlanetStructureInfo) => {
+    setPlanetStructure(info)
+  }
+
   return (
     <PlanetContext.Provider
       value={{
         // values
         stateNavbar,
         planetsLinks,
+        planetStructure,
 
         // methods
         changeNav,
+        handleClick,
       }}
     >
       {children}

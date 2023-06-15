@@ -41,7 +41,7 @@ export const PlanetInformation: FC<Props> = ({
       {information.map(info => (
         <div
           key={info.id}
-          className='bg-slate-800 px-5 py-4 w-full rounded space-y-2 border-2 border-slate-700 hover:scale-110 duration-300 ease-in-out'
+          className='bg-slate-800 px-5 py-4 w-full rounded space-y-2 border-2 border-slate-700 hover:scale-105 duration-300 ease-in-out'
         >
           <p className='uppercase text-sm font-medium text-slate-400 tracking-wider'>
             {info.title}
