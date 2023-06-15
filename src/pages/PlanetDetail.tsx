@@ -6,7 +6,6 @@ import { PlanetInformation } from '../components/PlanetInformation'
 import { Layout } from '../components/Layout'
 
 import { getPlanets } from '../services/planets'
-import { useEffect } from 'react'
 
 export const PlanetDetail = (props: {
   params: {
